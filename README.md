@@ -24,7 +24,7 @@ The game ends when the player loses both life points or finds the crown.
 The biggest challenge I see is having the mini game of dodging hits within the main game of opening the rooms. How this part will work is once the player opens the room, it will initiate the mini-game where the player icon will show up on the bottom of a grid and sword icons animations will start to drop at some speed and the player has to use the arrow keys to avoid it and reach the top of the grid. I will looking into using canvas / p5.js to do this.
 
 ## Wireframe
-![wireframe]<img src="/src/images/wireframe.png" width="200" height="200"/>
+<img src="/src/images/wireframe.png" width="400" height="300"/>
 
 ## Implementation Timeline
 ### December 14
