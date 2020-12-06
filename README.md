@@ -27,23 +27,23 @@ The biggest challenge I see is having the mini game of dodging hits within the m
 <img src="/src/images/wireframe.png" width="400" height="300"/>
 
 ## Implementation Timeline
-### December 14
+### December 7
 * Game logic for rendering the board with randomized rooms (King, Commander, and Queen first)
 * Functionality for the rooms (ex: clicking on maid will open another room)
 * Adding and reducing life counts 
 
-### December 15 
+### December 8
 * Dodging hits mini game 
 
-### December 16
+### December 9
 * Dodging hits mini game finish
 * Splash page with description, rules and instructions
 
-### December 17
+### December 10
 * CSS and finding/ creating images to use
 * Audio and animation effects on rooms and doors 
 
-### December 18
+### December 11
 * Finish styling
 * Finish README
 
