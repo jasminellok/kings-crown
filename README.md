@@ -37,6 +37,7 @@ The biggest challenge I see is having the mini game of dodging hits within the m
 
 ### December 16
 * Dodging hits mini game finish
+* Splash page with description, rules and instructions
 
 ### December 17
 * CSS and finding/ creating images to use
