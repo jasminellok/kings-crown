@@ -25,7 +25,7 @@ The biggest challenge I see is having the mini game of dodging hits within the m
 
 ## Wireframe
 <img src="/src/images/wireframe.png" width="400" height="300"/>
-
+<img src="/src/images/wireframe2.png" width="400" height="300"/>
 
 ## Implementation Timeline
 ### December 7
