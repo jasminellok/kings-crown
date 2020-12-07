@@ -5,12 +5,11 @@ export default class Broadsword {
         this.width = 30;
         this.height = 30;
         this.speed = 10;        
-        this.xPos = Math.random()* (cWidth/2);
-        this.yPos = Math.random()* (cHeight/2);
-        this.radius = this.height/2;
+        this.xPos = Math.floor(Math.random()* (cWidth-100));
+        this.yPos = Math.ceil(Math.random()* cHeight/2);
         this.itemImg = "src/images/broadsword.png";
-        this.xVel = (Math.random()*2 > 1) ? 1 : 3;
-        this.yVel = this.xVel+1;
+        this.xVel = Math.floor(Math.random()*3) + 1;
+        this.yVel = 3;
         this.drawItem = this.drawItem.bind(this);
         this.moveItem = this.moveItem.bind(this)
     }
@@ -24,18 +23,19 @@ export default class Broadsword {
             this.xPos, this.yPos, (this.width*2), (this.height*2)); 
     }
 
-    moveItem(ctx, canvas) {
-        if ((this.xPos > (canvas.width-this.width)) || (this.xPos < (4))) {
-            this.xVel = -this.xVel;
+    moveItem(ctx, cWidth,cHeight) {
+        if ((this.xPos + this.xVel) >= (cWidth - this.width)) {
+            this.xVel = - (Math.abs(this.xVel));
+        } else if (this.xPos - this.xVel <= 0) {
+            this.xVel = Math.abs(this.xVel);
         }
-        if ((this.yPos > (canvas.height-this.height)) || (this.yPos < (4))) {
-            this.yVel = -this.yVel;
+
+        if ((this.yPos + this.yVel) >= (cHeight - this.height)) {
+            this.yVel = - (Math.abs(this.yVel));
+        } else if (this.yPos - this.yVel <= 0) {
+            this.yVel = Math.abs(this.yVel);
         }
-        if (this.xPos > 0 && this.yPos<0) {
-            this.yVel = this.xVel;
-        } else if (this.xPos < 0 && this.yPos>0) {
-            this.xVel = this.yVel;
-        }
+
         this.xPos += this.xVel;
         this.yPos += this.yVel;
         this.drawItem(ctx)

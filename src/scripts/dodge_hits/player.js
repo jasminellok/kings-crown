@@ -22,10 +22,10 @@ export default class Player {
             this.xPos, this.yPos, this.width, this.height); 
     }
 
-    movePlayer(canvas, e) {
+    movePlayer(cWidth,cHeight,e) {
         switch (e.key) {
         case "ArrowRight":
-            if (this.xPos < (canvas.width-this.width)) {this.xPos += this.speed};
+            if (this.xPos < (cWidth-this.width)) {this.xPos += this.speed};
             break;
         case "ArrowLeft":
             if (this.xPos > -10) {this.xPos -= this.speed};
@@ -34,7 +34,7 @@ export default class Player {
             if (this.yPos > -30) {this.yPos -= this.speed};
             break;
         case "ArrowDown":
-            if (this.yPos < (canvas.height-this.height)) {this.yPos += this.speed};
+            if (this.yPos < (cHeight-this.height)) {this.yPos += this.speed};
             break;
         }
     }
