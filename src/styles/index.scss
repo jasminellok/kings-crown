@@ -1,0 +1,16 @@
+.canvas-mini-game {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+  background-color: rgb(77, 63, 65);
+}
+.canvas-container{
+    border: 1px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
