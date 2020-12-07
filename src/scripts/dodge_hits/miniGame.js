@@ -10,13 +10,21 @@ bg.src = "src/images/background.png";
 
 
 const mc = new Player(canvas.width, canvas.height)
-const weapon = new Broadsword(canvas.width, canvas.height)
+
+let weaponCache = []
+for (let count=0; count < 4; count++) {
+    const weapon = new Broadsword(canvas.width, canvas.height)
+    weaponCache.push(weapon)
+}
+
 
 function animate() {
     ctx.clearRect(0,0,canvas.width, canvas.height)
     ctx.drawImage(bg, 0,0, canvas.width, canvas.height); //background
     mc.drawPlayer(ctx)
-    weapon.moveItem(ctx, canvas)
+    weaponCache.forEach (weapon => {
+        weapon.moveItem(ctx, canvas)
+    })
     requestAnimationFrame(animate);
 }
 
