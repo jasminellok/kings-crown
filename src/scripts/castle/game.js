@@ -12,4 +12,5 @@ window.addEventListener('keydown', function(e) {
     e.preventDefault();
     dodgeHits.registerPlayerMoves(e);
     dodgeHits.closeGame(e);
+    dodgeHits.showGame(e);
 });

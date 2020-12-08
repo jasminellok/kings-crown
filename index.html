@@ -10,13 +10,16 @@
 </head>
 
 <body>
-    <div class="canvas-success"><div>You Escaped Successfully! Press ENTER to exit</div></div>
-    <div class="canvas-fail"><div>You were injured in your escape ... Lose a life! Press ENTER to exit</div></div>
-    <div class="canvas-container">
-        <div class="canvas-message-container">
-            <div class="canvas-message"> Stay away from the knights attacks and escape into the top bushes!</div>
+
+    <div class="minigame">
+        <div class="canvas-success"><div>You Escaped Successfully! <div> Press ESC to exit </div></div></div>
+        <div class="canvas-fail"><div>You were injured in your escape ... Lose a life! Press ESC to exit</div></div>
+        <div class="canvas-container">
+            <div class="canvas-message-container">
+                <div class="canvas-message"> Stay away from the knights attacks and escape into the top bushes! Press ENTER to start</div>
+            </div>
+            <canvas class="canvas-mini-game"></canvas>
         </div>
-        <canvas class="canvas-mini-game"></canvas>
     </div>
     <script type="application/javascript" src="./dist/main.js"></script>
 </body>

@@ -13,11 +13,13 @@ export default class MiniGame {
         this.successMessage = document.getElementsByClassName('canvas-success')[0];
         this.failMessage = document.getElementsByClassName('canvas-fail')[0];
         this.genMessage = document.getElementsByClassName('canvas-message-container')[0];
+        this.background = document.getElementsByClassName('minigame')[0];
         
         this.weaponCache = [];
         this.player = new Player(this.cWidth, canvas.height);
         this.gameOn = true;
         this.gameResult = 0;
+        this.reset = false;
         
         this.generateWeaponCache = this.generateWeaponCache.bind(this);
         this.drawBg = this.drawBg.bind(this);
@@ -25,10 +27,12 @@ export default class MiniGame {
         this.animateGame = this.animateGame.bind(this);
         this.success = this.success.bind(this);
         this.ckCollision = this.ckCollision.bind(this);
-        this.closeGame = this.closeGame.bind(this)
+        this.closeGame = this.closeGame.bind(this);
+        this.resetGame = this.resetGame.bind(this);
+        this.showGame = this.showGame.bind(this);
     }
 
-    generateWeaponCache() {
+    generateWeaponCache() { //to play
         for (let count=0; count < (Math.ceil(Math.random()*3) +1); count++) {
             const weapon = new Broadsword(this.cWidth, this.cHeight)
             this.weaponCache.push(weapon)
@@ -41,7 +45,7 @@ export default class MiniGame {
         this.canvas.style.display = "block"
     }
     
-    registerPlayerMoves(e) {
+    registerPlayerMoves(e) { //keydown listener
         if (!this.gameOn) return;
         this.player.movePlayer(this.cWidth,this.cHeight, e);
         this.player.drawPlayer(this.ctx)
@@ -55,7 +59,25 @@ export default class MiniGame {
         return false
     }
     
-    animateGame() {
+    ckCollision(weapon){
+        let wLeft = weapon.xPos;
+        let wRight = weapon.xPos + (weapon.width);
+        let wTop = weapon.yPos;
+        let wBottom = weapon.yPos + (weapon.height);
+
+        let pXCenter = this.player.xPos + (this.player.width/2);
+        let pYCenter = this.player.yPos + (this.player.height/2);
+
+        if ( ((pYCenter < wBottom) && (pYCenter > wTop)) && ((pXCenter < wRight) && (pXCenter > wLeft)) ) {
+            this.gameOn = false;
+            this.gameResult = -1;
+            return true;
+        }
+        return false;
+    }
+
+    animateGame() { //to play
+        this.reset = false;
         this.ctx.clearRect(0,0,this.cWidth, this.cHeight)  
         this.drawBg()
         this.player.drawPlayer(this.ctx)
@@ -74,34 +96,39 @@ export default class MiniGame {
         if (this.gameOn) requestAnimationFrame(this.animateGame);
     }
 
-    ckCollision(weapon){
-        let wLeft = weapon.xPos;
-        let wRight = weapon.xPos + (weapon.width);
-        let wTop = weapon.yPos;
-        let wBottom = weapon.yPos + (weapon.height);
 
-        let pXCenter = this.player.xPos + (this.player.width/2);
-        let pYCenter = this.player.yPos + (this.player.height/2);
-
-        if ( ((pYCenter < wBottom) && (pYCenter > wTop)) && ((pXCenter < wRight) && (pXCenter > wLeft)) ) {
-            this.gameOn = false;
-            this.gameResult = -1;
-            return true;
-        }
-        return false;
-    }
-
-    closeGame(e){
-        if (e.key === "Enter") {
+    closeGame(e){ //keydown listener
+        if (e.key === "Escape") {
             if (this.canvas.style.display === "block") {
                 this.canvas.style.display = "none";
                 this.successMessage.style.display = "none";
                 this.failMessage.style.display = "none";
                 this.genMessage.style.display = "none";
+                this.background.style.background = "none";
             } 
         }
     }
 
+    resetGame() { //starting game, to play
+        this.weaponCache = [];
+        let newPlayer = new Player(this.cWidth, canvas.height);
+        this.player = newPlayer;
+        this.gameOn = true;
+        this.gameResult = 0;
+        this.reset = true;
+    }
+
+    showGame(e){
+        if (e.key === "Enter" && this.reset) {
+            if (this.canvas.style.display === "none") {
+                this.canvas.style.display = "block";
+                this.successMessage.style.display = "block";
+                this.failMessage.style.display = "block";
+                this.genMessage.style.display = "block";
+                this.background.style.background = "rgba(158, 153, 153, 0.7)";
+            } 
+        }
+    }
 
 }
 
