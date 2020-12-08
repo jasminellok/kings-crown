@@ -24,11 +24,42 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(241, 237, 234);
   border-radius: 5px;
-  background-color: rgb(129, 201, 129);
+  background-color: rgb(37, 137, 161);
 }
-
 
 .canvas-mini-game{
   border-radius: 5px;
+}
+
+.canvas-success{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  font-size: 18px;
+  padding: 5px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(241, 237, 234);
+  border-radius: 3px;
+  background-color: rgb(129, 201, 129);
+  display: none;
+}
+
+.canvas-fail{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  font-size: 18px;
+  padding: 5px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(253, 251, 250);
+  border-radius: 3px;
+  background-color: rgb(226, 158, 170);
+  display: none;
 }
 

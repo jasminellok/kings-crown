@@ -1,3 +1,4 @@
+//not used
 export default class Collision {
     constructor(x,y) {
         this.srcX = 0; 

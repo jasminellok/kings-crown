@@ -10,7 +10,9 @@ export default class MiniGame {
         this.canvas = canvas;
         this.cWidth = canvas.width;
         this.cHeight = canvas.height;
-        this.message = document.getElementsByClassName('canvas-message')[0];
+        this.successMessage = document.getElementsByClassName('canvas-success')[0];
+        this.failMessage = document.getElementsByClassName('canvas-fail')[0];
+        this.genMessage = document.getElementsByClassName('canvas-message-container')[0];
         
         this.weaponCache = [];
         this.player = new Player(this.cWidth, canvas.height);
@@ -23,10 +25,11 @@ export default class MiniGame {
         this.animateGame = this.animateGame.bind(this);
         this.success = this.success.bind(this);
         this.ckCollision = this.ckCollision.bind(this);
+        this.closeGame = this.closeGame.bind(this)
     }
 
     generateWeaponCache() {
-        for (let count=0; count < Math.ceil(Math.random()*4); count++) {
+        for (let count=0; count < (Math.ceil(Math.random()*3) +1); count++) {
             const weapon = new Broadsword(this.cWidth, this.cHeight)
             this.weaponCache.push(weapon)
         }
@@ -58,10 +61,15 @@ export default class MiniGame {
         this.player.drawPlayer(this.ctx)
         this.weaponCache.forEach (weapon => {
             weapon.moveItem(this.ctx,this.cWidth,this.cHeight)
-            this.ckCollision(weapon)
+            if (this.ckCollision(weapon)) {
+                this.failMessage.style.display = "block"
+                // let hit = new Collision((weapon.xPos),weapon.yPos) 
+                // hit.drawItem(this.ctx);
+            }
         })
-        if (this.success()){
 
+        if (this.success()){
+            this.successMessage.style.display = "block"
         }
         if (this.gameOn) requestAnimationFrame(this.animateGame);
     }
@@ -82,19 +90,22 @@ export default class MiniGame {
         }
         return false;
     }
+
+    closeGame(e){
+        if (e.key === "Enter") {
+            if (this.canvas.style.display === "block") {
+                this.canvas.style.display = "none";
+                this.successMessage.style.display = "none";
+                this.failMessage.style.display = "none";
+                this.genMessage.style.display = "none";
+            } 
+        }
+    }
+
+
 }
 
 
-let canvas = document.querySelector("canvas");
-canvas.width = 300;
-canvas.height = 300;
 
-let dodgeHits = new MiniGame(canvas)
-dodgeHits.generateWeaponCache();
-dodgeHits.animateGame()
 
-window.addEventListener('keydown', function(e) {
-    e.preventDefault()
-    dodgeHits.registerPlayerMoves(e)
-});
 

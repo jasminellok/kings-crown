@@ -5,7 +5,7 @@ export default class Broadsword {
         this.width = 30;
         this.height = 30;   
         this.xPos = Math.floor(Math.random()* (cWidth-100));
-        this.yPos = Math.ceil(Math.random()* cHeight/5);
+        this.yPos = Math.ceil(Math.random()* cHeight/6);
         this.itemImg = "src/images/broadsword.png";
         this.xVel = Math.floor(Math.random()*4) + 1;
         this.yVel = this.xVel;
