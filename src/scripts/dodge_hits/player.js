@@ -9,8 +9,10 @@ export default class Player {
         this.yPos = cHeight-this.height;
         this.radius = this.height/2;
         this.playerImg = "src/images/thief48_64.png";
-        this.speed = 10
+        this.speed = 10;
         this.drawPlayer = this.drawPlayer.bind(this);
+        //this.animatePlayer = this.animatePlayer.bind(this);
+        this.movePlayer = this.movePlayer.bind(this);
     }
 
     drawPlayer(ctx) {
@@ -21,7 +23,7 @@ export default class Player {
             player, this.srcX, this.srcY, this.width, this.height, 
             this.xPos, this.yPos, this.width, this.height); 
     }
-
+    
     movePlayer(cWidth,cHeight,e) {
         switch (e.key) {
         case "ArrowRight":

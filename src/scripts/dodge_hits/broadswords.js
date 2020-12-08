@@ -3,13 +3,12 @@ export default class Broadsword {
         this.srcX = 0; //3rd rw
         this.srcY = 0; //2nd col
         this.width = 30;
-        this.height = 30;
-        this.speed = 10;        
+        this.height = 30;   
         this.xPos = Math.floor(Math.random()* (cWidth-100));
-        this.yPos = Math.ceil(Math.random()* cHeight/2);
+        this.yPos = Math.ceil(Math.random()* cHeight/5);
         this.itemImg = "src/images/broadsword.png";
-        this.xVel = Math.floor(Math.random()*3) + 1;
-        this.yVel = 3;
+        this.xVel = Math.floor(Math.random()*4) + 1;
+        this.yVel = this.xVel;
         this.drawItem = this.drawItem.bind(this);
         this.moveItem = this.moveItem.bind(this)
     }
@@ -20,7 +19,7 @@ export default class Broadsword {
         item.src = this.itemImg;
         ctx.drawImage(
             item, this.srcX, this.srcY, this.width, this.height, 
-            this.xPos, this.yPos, (this.width*2), (this.height*2)); 
+            this.xPos, this.yPos, (this.width), (this.height)); 
     }
 
     moveItem(ctx, cWidth,cHeight) {
