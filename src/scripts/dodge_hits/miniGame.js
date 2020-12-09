@@ -13,7 +13,7 @@ export default class MiniGame {
         this.successMessage = document.getElementsByClassName('canvas-success')[0];
         this.failMessage = document.getElementsByClassName('canvas-fail')[0];
         this.genMessage = document.getElementsByClassName('canvas-message-container')[0];
-        this.background = document.getElementsByClassName('minigame')[0];
+        this.miniGame = document.getElementsByClassName('minigame')[0];
         
         this.weaponCache = [];
         this.player = new Player(this.cWidth, canvas.height);
@@ -78,6 +78,7 @@ export default class MiniGame {
 
     animateGame() { //to play
         this.reset = false;
+        if (!this.gameOn) return;
         this.ctx.clearRect(0,0,this.cWidth, this.cHeight)  
         this.drawBg()
         this.player.drawPlayer(this.ctx)
@@ -104,8 +105,9 @@ export default class MiniGame {
                 this.successMessage.style.display = "none";
                 this.failMessage.style.display = "none";
                 this.genMessage.style.display = "none";
-                this.background.style.background = "none";
+                this.miniGame.style.background = "none";
             } 
+            this.gameOn = false;
         }
     }
 

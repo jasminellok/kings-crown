@@ -1,35 +1,106 @@
 body {
-  background-color: rgb(8, 0, 8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: black;
+
 }
 
 .main-bg {
   border-radius: 5px;
-  width: 1000px;
-  height: 700px;
+  width: 1200px;
+  height: 680px;
 }
 
+.castle-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 100px;
+  padding-right: 130px;
+  font-size:15px;
+}
+
+.castle-heading div {
+  margin-bottom: 5px;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgb(177, 9, 37);
+}
+
+.castle-life {
+  display: flex;
+}
+
+.castle-game-container{
+  color:white;
+  position: fixed;  
+  justify-content: center;
+  top: 190px;
+  left: 60px;
+  width: 1100px;
+  height: 500px;
+  z-index: 10px;
+}
+
+.castle-board{
+  padding-left: 18px;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  row-gap: 10px;
+  perspective: 600px;
+}
+
+.room {
+  position:relative;
+  width: 200px;
+  height: 143px;
+  background-color: rgb(44, 1, 1);
+  opacity: 85%;
+  border-radius: 5px;
+  margin:0px;
+}
+
+.room-design{
+  position: absolute;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 800ms ease-in-out;
+  backface-visibility: hidden;
+}
+
+.door-img{
+  width: 200px;
+  height: 145px;
+  border-radius: 10px;
+}
+
+.room.shown .door-side {
+  transform: rotateY(-180deg);
+}
+
+.room.shown .suit-side {
+  transform: rotateY(0deg);
+}
+
+.door-side {
+  transform: rotateY(0)
+}
+
+.suit-side {
+  transform: rotateY(180deg);
+}
 
 /////////////////////////////////////
-.minigame {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background: rgba(158, 153, 153, 0.7);
-  z-index: 10;
-}
 
 .canvas-success{
   width: 24%;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 350px;
+  left: 600px;
   transform: translate(-50%, -50%);
-  z-index:20;
+  z-index:25;
   font-size: 18px;
   padding: 5px;
   font-weight: bold;
@@ -47,10 +118,10 @@ body {
 .canvas-fail{
   width: 24%;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 350px;
+  left: 620px;
   transform: translate(-50%, -50%);
-  z-index:20;
+  z-index:25;
   font-size: 18px;
   padding: 5px;
   font-weight: bold;
@@ -67,9 +138,10 @@ body {
 
 .canvas-container {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 380px;
+  left: 620px;
   transform: translate(-50%, -50%);
+  display: none;
 }
 
 .canvas-message-container{
