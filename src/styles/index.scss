@@ -76,11 +76,11 @@ body {
   border-radius: 10px;
 }
 
-.room.shown .door-side {
+#shown .door-side {
   transform: rotateY(-180deg);
 }
 
-.room.shown .suit-side {
+#shown .suit-side {
   transform: rotateY(0deg);
 }
 
@@ -93,12 +93,23 @@ body {
 }
 
 /////////////////////////////////////
+.canvas-container {
+  position: absolute;
+  top: 380px;
+  left: 620px;
+  transform: translate(-50%, -50%);
+}
+
+.c-message{
+  text-align: center;
+}
 
 .canvas-success{
-  width: 24%;
+  width: 290px;
+  height: 40px;
   position: absolute;
   top: 350px;
-  left: 600px;
+  left: 620px;
   transform: translate(-50%, -50%);
   z-index:25;
   font-size: 18px;
@@ -108,15 +119,13 @@ body {
   color: rgb(241, 237, 234);
   border-radius: 3px;
   background-color: rgb(129, 201, 129);
+  opacity: 90%;
   display: none;
 }
 
-.canvas-success > div {
-  text-align: center;
-}
-
 .canvas-fail{
-  width: 24%;
+  width: 290px;
+  height: 40px;
   position: absolute;
   top: 350px;
   left: 620px;
@@ -129,18 +138,7 @@ body {
   color: rgb(253, 251, 250);
   border-radius: 3px;
   background-color: rgb(226, 158, 170);
-  display: none;
-}
-
-.canvas-fail > div {
-  text-align: center;
-}
-
-.canvas-container {
-  position: absolute;
-  top: 380px;
-  left: 620px;
-  transform: translate(-50%, -50%);
+  opacity: 90%;
   display: none;
 }
 
@@ -149,7 +147,6 @@ body {
   height: 60px;
   margin-bottom: 5px;
   padding: 5px;
-  display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
@@ -160,6 +157,7 @@ body {
   border-radius: 5px;
   background-color: rgb(5, 75, 92);
   text-align: center;
+  display: none;
 }
 
 .canvas-mini-game{

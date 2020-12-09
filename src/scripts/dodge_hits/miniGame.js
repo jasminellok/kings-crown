@@ -3,7 +3,7 @@ import Broadsword from './broadswords';
 import Collision from './collision';
 
 export default class MiniGame {
-    constructor(canvas) {
+    constructor(canvas, difficulty) {
         this.ctx = canvas.getContext('2d');
         this.bgSrc = "src/images/background.png";
         this.bgImg = new Image();
@@ -12,9 +12,11 @@ export default class MiniGame {
         this.cHeight = canvas.height;
         this.successMessage = document.getElementsByClassName('canvas-success')[0];
         this.failMessage = document.getElementsByClassName('canvas-fail')[0];
-        this.genMessage = document.getElementsByClassName('canvas-message-container')[0];
+        this.canvasMessageCont = document.getElementsByClassName('canvas-message-container')[0];
         this.miniGame = document.getElementsByClassName('minigame')[0];
         
+        this.difficulty= difficulty;
+        this.wCount = ((Math.ceil(Math.random()* difficulty)) + 1) + difficulty;
         this.weaponCache = [];
         this.player = new Player(this.cWidth, canvas.height);
         this.gameOn = true;
@@ -33,8 +35,8 @@ export default class MiniGame {
     }
 
     generateWeaponCache() { //to play
-        for (let count=0; count < (Math.ceil(Math.random()*3) +1); count++) {
-            const weapon = new Broadsword(this.cWidth, this.cHeight)
+        for (let count=0; count < this.wCount; count++) {
+            const weapon = new Broadsword(this.cWidth, this.cHeight, this.difficulty)
             this.weaponCache.push(weapon)
         }
     }
@@ -126,7 +128,7 @@ export default class MiniGame {
                 this.canvas.style.display = "block";
                 this.successMessage.style.display = "block";
                 this.failMessage.style.display = "block";
-                this.genMessage.style.display = "block";
+                this.canvasMessageCont.style.display = "flex";
                 this.background.style.background = "rgba(158, 153, 153, 0.7)";
             } 
         }

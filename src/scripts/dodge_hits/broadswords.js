@@ -1,5 +1,5 @@
 export default class Broadsword {
-    constructor(cWidth,cHeight) {
+    constructor(cWidth,cHeight, difficulty) {
         this.srcX = 0; //3rd rw
         this.srcY = 0; //2nd col
         this.width = 30;
@@ -7,7 +7,8 @@ export default class Broadsword {
         this.xPos = Math.floor(Math.random()* (cWidth-100));
         this.yPos = Math.ceil(Math.random()* cHeight/6);
         this.itemImg = "src/images/broadsword.png";
-        this.xVel = Math.floor(Math.random()*4) + 1;
+        this.dir = (Math.random() > .5) ? -1 : 1
+        this.xVel = ((Math.floor(Math.random()* difficulty) +1) + difficulty) * this.dir;
         this.yVel = this.xVel;
         this.drawItem = this.drawItem.bind(this);
         this.moveItem = this.moveItem.bind(this)
