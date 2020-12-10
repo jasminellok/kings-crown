@@ -2,21 +2,28 @@ import Player from './player';
 import Broadsword from './broadswords';
 import Collision from './collision';
 
+
+
 export default class MiniGame {
-    constructor(canvas) {
-        this.ctx = canvas.getContext('2d');
+    constructor(difficulty) {
+        this.canvas = document.getElementsByClassName("canvas-mini-game")[0];
+        this.canvas.width = 300;
+        this.canvas.height = 300;
+        this.ctx = this.canvas.getContext('2d');
+
         this.bgSrc = "src/images/background.png";
         this.bgImg = new Image();
-        this.canvas = canvas;
-        this.cWidth = canvas.width;
-        this.cHeight = canvas.height;
+        this.cWidth = this.canvas.width;
+        this.cHeight = this.canvas.height;
         this.successMessage = document.getElementsByClassName('canvas-success')[0];
         this.failMessage = document.getElementsByClassName('canvas-fail')[0];
-        this.genMessage = document.getElementsByClassName('canvas-message-container')[0];
+        this.canvasMessageCont = document.getElementsByClassName('canvas-message-container')[0];
         this.miniGame = document.getElementsByClassName('minigame')[0];
         
+        this.difficulty= difficulty;
+        this.wCount = ((Math.ceil(Math.random()* difficulty)) + 1) + difficulty;
         this.weaponCache = [];
-        this.player = new Player(this.cWidth, canvas.height);
+        this.player = new Player(this.cWidth, this.cHeight);
         this.gameOn = true;
         this.gameResult = 0;
         this.reset = false;
@@ -33,8 +40,8 @@ export default class MiniGame {
     }
 
     generateWeaponCache() { //to play
-        for (let count=0; count < (Math.ceil(Math.random()*3) +1); count++) {
-            const weapon = new Broadsword(this.cWidth, this.cHeight)
+        for (let count=0; count < this.wCount; count++) {
+            const weapon = new Broadsword(this.cWidth, this.cHeight, this.difficulty)
             this.weaponCache.push(weapon)
         }
     }
@@ -60,14 +67,15 @@ export default class MiniGame {
     }
     
     ckCollision(weapon){
-        let wLeft = weapon.xPos;
-        let wRight = weapon.xPos + (weapon.width);
-        let wTop = weapon.yPos;
-        let wBottom = weapon.yPos + (weapon.height);
+        let wLeft = weapon.xPos; //0
+        let wRight = weapon.xPos + (weapon.width); // 0+w
+        let wTop = weapon.yPos; //0
+        let wBottom = weapon.yPos + (weapon.height); //0+h
 
-        let pXCenter = this.player.xPos + (this.player.width/2);
-        let pYCenter = this.player.yPos + (this.player.height/2);
+        let pXCenter = this.player.xPos + (this.player.width/2); //0+radius
+        let pYCenter = this.player.yPos + (this.player.height/2); //0+radius
 
+        //player he in weap y range, player wid in weap x range
         if ( ((pYCenter < wBottom) && (pYCenter > wTop)) && ((pXCenter < wRight) && (pXCenter > wLeft)) ) {
             this.gameOn = false;
             this.gameResult = -1;
@@ -126,7 +134,7 @@ export default class MiniGame {
                 this.canvas.style.display = "block";
                 this.successMessage.style.display = "block";
                 this.failMessage.style.display = "block";
-                this.genMessage.style.display = "block";
+                this.canvasMessageCont.style.display = "flex";
                 this.background.style.background = "rgba(158, 153, 153, 0.7)";
             } 
         }
