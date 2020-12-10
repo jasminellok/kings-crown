@@ -14,8 +14,9 @@
     <div class="castle-game-container">
         <div class="castle-heading">
             <div class="castle-life"> 
-                <p> Life: </p> 
-                <div class="life-count"></div> 2</div>
+                <div> Life: </div>
+                <div class="life-count"> 1 </div>
+            </div>
             <div class="castle-rules"> Rules </div>
         </div>
 
@@ -26,7 +27,19 @@
                 </div>
 
                 <div class="suit-side room-design">
-                    <img class="suit-value"  id="1" src="">
+                    <p class="suit-value-[0,0]"></p>
+                    <canvas class="suit-value" id="[0,0]"> </canvas>
+                </div>
+            </div>
+
+            <div class="room" id="shown">
+                <div class="door-side room-design">
+                    <img class="door-img" src="src/images/Basic_Door_Pixel.png" alt="door">
+                </div>
+                
+                <div class="suit-side room-design">
+                    <p class="suit-value-[0,1]"></p>
+                    <canvas class="suit-value" id="[0,1]"> </canvas>
                 </div>
             </div>
 
@@ -36,7 +49,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[0,2]"></p>
+                    <canvas class="suit-value" id="[0,2]"> </canvas>
                 </div>
             </div>
 
@@ -46,7 +60,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[0,3]"></p>
+                    <canvas class="suit-value" id="[0,3]"> </canvas>
                 </div>
             </div>
 
@@ -56,7 +71,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[0,4]"></p>
+                    <canvas class="suit-value" id="[0,4]"> </canvas>
                 </div>
             </div>
 
@@ -66,7 +82,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[1,0]"></p>
+                    <canvas class="suit-value" id="[1,0]"> </canvas>
                 </div>
             </div>
 
@@ -76,7 +93,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[1,1]"></p>
+                    <canvas class="suit-value" id="[1,1]"> </canvas>
                 </div>
             </div>
 
@@ -86,7 +104,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[1,2]"></p>
+                    <canvas class="suit-value" id="[1,2]"> </canvas>
                 </div>
             </div>
 
@@ -96,7 +115,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[1,3]"></p>
+                    <canvas class="suit-value" id="[1,3]"> </canvas>
                 </div>
             </div>
 
@@ -106,7 +126,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[1,4]"></p>
+                    <canvas class="suit-value" id="[1,4]"> </canvas>
                 </div>
             </div>
 
@@ -116,7 +137,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[2,0]"></p>
+                    <canvas class="suit-value" id="[2,0]"> </canvas>
                 </div>
             </div>
 
@@ -126,7 +148,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[2,1]"></p>
+                    <canvas class="suit-value" id="[2,1]"> </canvas>
                 </div>
             </div>
 
@@ -136,7 +159,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[2,2]"></p>
+                    <canvas class="suit-value" id="[2,2]"> </canvas>
                 </div>
             </div>
 
@@ -146,7 +170,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[2,3]"></p>
+                    <canvas class="suit-value" id="[2,3]"> </canvas>
                 </div>
             </div>
 
@@ -156,17 +181,8 @@
                 </div>
                 
                 <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
-                </div>
-            </div>
-
-            <div class="room" id="hidden">
-                <div class="door-side room-design">
-                    <img class="door-img" src="src/images/Basic_Door_Pixel.png" alt="door">
-                </div>
-                
-                <div class="suit-side room-design">
-                    <img class="suit-value" id="1" src="">
+                    <p class="suit-value-[2,4]"></p>
+                    <canvas class="suit-value" id="[2,4]"> </canvas>
                 </div>
             </div>
 
@@ -178,7 +194,7 @@
         <div class="canvas-fail c-message"><div>You were injured in your escape ... Lose a life! Press ESC to exit</div></div>
         <div class="canvas-container">
             <div class="canvas-message-container">
-                <div class="c-message"> Stay away from the knights attacks and escape into the top bushes! Press ENTER to start</div>
+                <div class="c-message"> Stay away from the guards attacks and escape into the top bushes! Press ENTER to start</div>
             </div>
             <canvas class="canvas-mini-game"></canvas>
         </div>

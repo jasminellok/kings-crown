@@ -1,6 +1,12 @@
 body {
   background: black;
+}
 
+p{
+  text-align: center;
+  width: 110px;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .main-bg {
@@ -18,16 +24,14 @@ body {
   font-size:15px;
 }
 
-.castle-heading div {
+.castle-heading > div{
   margin-bottom: 5px;
   padding: 5px;
   font-size: 20px;
   font-weight: bold;
   background-color: rgb(177, 9, 37);
-}
-
-.castle-life {
   display: flex;
+  align-content: center;
 }
 
 .castle-game-container{
@@ -91,6 +95,7 @@ body {
 .suit-side {
   transform: rotateY(180deg);
 }
+
 
 /////////////////////////////////////
 .canvas-container {
@@ -162,6 +167,7 @@ body {
 
 .canvas-mini-game{
   border-radius: 5px;
+  display: none;
 }
 
 
