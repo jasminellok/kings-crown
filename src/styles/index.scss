@@ -1,5 +1,29 @@
 body {
   background: black;
+  overflow-x:hidden;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size:50px;
+  width: 1200px;
+  justify-content: center;
+  align-items:center;
+  text-align: center;
+  z-index: 100;
+  color: rgb(241, 233, 241);
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgba(0, 0, 0, .6);
+}
+
+.overlay.shown {
+  display: flex;
+  flex-direction: column;
 }
 
 p{
@@ -43,6 +67,12 @@ p{
   width: 1100px;
   height: 500px;
   z-index: 10px;
+}
+
+.castle-life {
+  display: flex;
+  justify-content: space-between;
+  width: 60px;
 }
 
 .castle-board{
@@ -97,7 +127,9 @@ p{
 }
 
 
+
 /////////////////////////////////////
+
 .canvas-container {
   position: absolute;
   top: 380px;
@@ -160,10 +192,11 @@ p{
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(241, 237, 234);
   border-radius: 5px;
-  background-color: rgb(5, 75, 92);
+  background-color: rgb(2, 30, 37);
   text-align: center;
   display: none;
 }
+
 
 .canvas-mini-game{
   border-radius: 5px;

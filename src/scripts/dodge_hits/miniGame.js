@@ -5,7 +5,7 @@ import Collision from './collision';
 
 
 export default class MiniGame {
-    constructor(difficulty) {
+    constructor(difficulty, mainGame) {
         this.canvas = document.getElementsByClassName("canvas-mini-game")[0];
         this.canvas.width = 300;
         this.canvas.height = 300;
@@ -17,16 +17,15 @@ export default class MiniGame {
         this.cHeight = this.canvas.height;
         this.successMessage = document.getElementsByClassName('canvas-success')[0];
         this.failMessage = document.getElementsByClassName('canvas-fail')[0];
-        this.canvasMessageCont = document.getElementsByClassName('canvas-message-container')[0];
         this.miniGame = document.getElementsByClassName('minigame')[0];
+        this.canvasMessageCont = document.getElementsByClassName('canvas-message-container')[0];
         
         this.difficulty= difficulty;
         this.wCount = ((Math.ceil(Math.random()* difficulty)) + 1) + difficulty;
         this.weaponCache = [];
         this.player = new Player(this.cWidth, this.cHeight);
-        this.gameOn = true;
-        this.gameResult = 0;
-        this.reset = false;
+        this.gameOn = false;
+        this.mainGame = mainGame;
         
         this.generateWeaponCache = this.generateWeaponCache.bind(this);
         this.drawBg = this.drawBg.bind(this);
@@ -35,7 +34,6 @@ export default class MiniGame {
         this.success = this.success.bind(this);
         this.ckCollision = this.ckCollision.bind(this);
         this.closeGame = this.closeGame.bind(this);
-        this.resetGame = this.resetGame.bind(this);
         this.showGame = this.showGame.bind(this);
     }
 
@@ -78,14 +76,15 @@ export default class MiniGame {
         //player he in weap y range, player wid in weap x range
         if ( ((pYCenter < wBottom) && (pYCenter > wTop)) && ((pXCenter < wRight) && (pXCenter > wLeft)) ) {
             this.gameOn = false;
-            this.gameResult = -1;
+            this.mainGame.lifeCount -=1;
+            document.dispatchEvent(new Event("life-update"));
+            
             return true;
         }
         return false;
     }
 
     animateGame() { //to play
-        this.reset = false;
         if (!this.gameOn) return;
         this.ctx.clearRect(0,0,this.cWidth, this.cHeight)  
         this.drawBg()
@@ -94,14 +93,15 @@ export default class MiniGame {
             weapon.moveItem(this.ctx,this.cWidth,this.cHeight)
             if (this.ckCollision(weapon)) {
                 this.failMessage.style.display = "block"
-                // let hit = new Collision((weapon.xPos),weapon.yPos) 
-                // hit.drawItem(this.ctx);
+                if (this.difficulty > 1) document.dispatchEvent(new Event("commander-msg"));
             }
         })
 
         if (this.success()){
-            this.successMessage.style.display = "block"
+            this.successMessage.style.display = "block";
+            if (this.difficulty > 1) document.dispatchEvent(new Event("commander-msg"));
         }
+
         if (this.gameOn) requestAnimationFrame(this.animateGame);
     }
 
@@ -112,32 +112,19 @@ export default class MiniGame {
                 this.canvas.style.display = "none";
                 this.successMessage.style.display = "none";
                 this.failMessage.style.display = "none";
-                this.genMessage.style.display = "none";
+                this.canvasMessageCont.style.display = "none";
                 this.miniGame.style.background = "none";
             } 
             this.gameOn = false;
+            this.mainGame.dodgeHits = null;
         }
-    }
-
-    resetGame() { //starting game, to play
-        this.weaponCache = [];
-        let newPlayer = new Player(this.cWidth, canvas.height);
-        this.player = newPlayer;
-        this.gameOn = true;
-        this.gameResult = 0;
-        this.reset = true;
     }
 
     showGame(e){
-        if (e.key === "Enter" && this.reset) {
-            if (this.canvas.style.display === "none") {
-                this.canvas.style.display = "block";
-                this.successMessage.style.display = "block";
-                this.failMessage.style.display = "block";
-                this.canvasMessageCont.style.display = "flex";
-                this.background.style.background = "rgba(158, 153, 153, 0.7)";
-            } 
-        }
+        if (this.canvas.style.display === "none") {
+            this.canvas.style.display = "block";
+        } 
+        this.gameOn = true; 
     }
 
 }
