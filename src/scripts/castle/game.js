@@ -33,6 +33,14 @@ export default class Game {
         suit.displayMessage();
         if (suit.value === 'guard' || suit.value === 'commander' || 
             suit.value === 'storage' || suit.value === 'crown' || suit.value === 'prince') {
+                let guardI;
+                this.guardLocation.forEach((ele, i) => {
+                    if ((ele[0] === r) && (ele[1]===c)) {
+                        guardI = i;
+                    }
+                });
+                if (guardI) this.guardLocation.splice(guardI,1);
+                console.log("openroom", this.guardLocation)
                 return suit.value
         } else {
             return false
@@ -42,9 +50,11 @@ export default class Game {
     specialRooms(roomValue){
         switch(roomValue){
             case 'guard':
+                this.dodgeHits = true;
                 this.playMiniGame(1, this);
                 break
             case 'commander':
+                this.dodgeHits = true;
                 this.playMiniGame(2, this);
                 break
             case 'storage':
@@ -55,6 +65,17 @@ export default class Game {
                 this.gameWin()
                 break
             case 'prince':
+                if (this.guardLocation.length > 1) {
+                    // debugger;
+                    const roomNum = this.guardLocation[1];
+                    const [r, c] = [`${roomNum[0]}`, `${roomNum[1]}`];
+                    const roomVal = document.getElementById(`${r}-${c}`);
+                    const room = roomVal.parentElement.parentElement;
+                    room.setAttribute('id','shown')
+                    this.board.grid[roomNum[0]][roomNum[1]].drawSuit();
+                    this.board.grid[roomNum[0]][roomNum[1]].displayMessage();
+                    // debugger;
+                }
                 break
         }
     }

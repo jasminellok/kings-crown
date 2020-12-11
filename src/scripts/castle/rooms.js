@@ -32,7 +32,7 @@ export default class Room {
                 this.suitValue.innerHTML = "You found the crown!"
                 break;
             case "commander":
-                this.suitValue.innerHTML = "You've been spotted by the Commander!! Prepare to run fast soon!"
+                this.suitValue.innerHTML = "You've been spotted by the Commander!! Prepare to run fast in 3 seconds!"
                 break;
             case "queen":
                 this.suitValue.innerHTML = "You've spotted the Queen. The King should be on the same floor (level)."
@@ -41,7 +41,7 @@ export default class Room {
                 this.suitValue.innerHTML = "The Prince is yelling for his guards... You found a location of a guard."
                 break;
             case "guard":
-                this.suitValue.innerHTML = "You've been spotted by a guard! Prepare to run soon!"
+                this.suitValue.innerHTML = "You've been spotted by a guard! Prepare to run in 3 seconds!"
                 break;
             case "maid":
                 this.suitValue.innerHTML = "You found a maid cleaning..."

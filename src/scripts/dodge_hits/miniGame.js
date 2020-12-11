@@ -116,7 +116,7 @@ export default class MiniGame {
                 this.miniGame.style.background = "none";
             } 
             this.gameOn = false;
-            return this.gameResult;
+            this.mainGame.dodgeHits = null;
         }
     }
 

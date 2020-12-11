@@ -18,8 +18,6 @@ const ready = () => {
         msg.innerHTML = "The commander should be always near the king... the crown should be in an adjacent room"
     })
 
-
-
     overlayMessages.forEach(msg => {
         msg.addEventListener('click', () => {
             msg.classList.remove('shown');
@@ -29,14 +27,17 @@ const ready = () => {
 
     rooms.forEach(room => {
         room.addEventListener('click', () => {
-            room.setAttribute('id','shown');
-            const roomValue = game.openRoom(room);
-            if (roomValue) {
-                game.specialRooms(roomValue);
+            if (!game.dodgeHits) {
+                room.setAttribute('id','shown');
+                const roomValue = game.openRoom(room);
+                if (roomValue) {
+                    game.specialRooms(roomValue);
+                }
+                if (game.ckloseGame()) {
+                    //life === 0 || no more rooms?
+                }
             }
-            if (game.ckloseGame()) {
-                //life === 0 || no more rooms?
-            }
+
         })
     })
 
