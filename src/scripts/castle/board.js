@@ -7,6 +7,7 @@ export default class Board {
         this.col = col;
         this.grid = this.makeGrid(row,col); //2d arr of nulls
         this.roomMap = {};
+        this.roomKeys;
 
         this.makeGrid = this.makeGrid.bind(this);
         this.validComPos = this.validComPos.bind(this);
@@ -20,13 +21,16 @@ export default class Board {
     }
 
     makeGrid(row, col) {
+        const roomKeys = [];
         const grid = []
         for (let i = 0; i < row; i++) {
             grid.push([]);
             for (let j = 0; j < col; j++) {
                 grid[i].push(null);
+                roomKeys.push([i,j])
             }
         }
+        this.roomKeys = roomKeys;
         return grid;
     }
 
@@ -95,18 +99,19 @@ export default class Board {
             [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
         }
 
-        let roomNum = [...Array(3*5).keys()];
+        // let roomNum = [...Array(this.row*this.col).keys()];
 
-        for (let i = 0; i < row; i++) {
-            for (let j = 0; j < col; j++) {
-                if (this.grid[i][j] === null) {
-                    let populateValue = remaining.shift();
-                    this.populate(populateValue,[i,j]);
-                }
-                let value = this.grid[i][j].value;
-                this.roomMap[roomNum.shift()] = value;
+        this.roomKeys.forEach(room => {
+            let i = room[0];
+            let j = room[1];
+            if (this.grid[i][j] === null) {
+                let populateValue = remaining.shift();
+                this.populate(populateValue,[i,j]);
             }
-        }
+            let value = this.grid[i][j].value;
+            if (!this.roomMap[value]) this.roomMap[value] = [];
+            this.roomMap[value].push([i,j]);
+        })
 
 
     }
@@ -131,6 +136,7 @@ export default class Board {
             break;
         }
     }
+
 
 
 }

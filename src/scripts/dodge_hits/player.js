@@ -19,9 +19,9 @@ export default class Player {
         //player src pos, canvas pos
         const player = new Image();
         player.src = this.playerImg;
-        ctx.drawImage(
-            player, this.srcX, this.srcY, this.width, this.height, 
-            this.xPos, this.yPos, this.width, this.height); 
+            ctx.drawImage(
+                player, this.srcX, this.srcY, this.width, this.height, 
+                this.xPos, this.yPos, this.width, this.height); 
     }
     
     movePlayer(cWidth,cHeight,e) {
