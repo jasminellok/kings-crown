@@ -5,23 +5,27 @@ import Game from "./scripts/castle/game.js"
 const ready = () => {
     let overlayMessages = Array.from(document.getElementsByClassName("overlay"));
     let rooms =  Array.from(document.getElementsByClassName("room"));
-    let game = new Game();
+    let game;
 
     document.addEventListener("life-update", ()=> {
         document.getElementsByClassName('life-count')[0].innerHTML = game.lifeCount;
     })
 
     document.addEventListener("commander-msg", ()=> {
-        const r = game.shownRooms[game.shownRooms.length-1][0];
-        const c = game.shownRooms[game.shownRooms.length-1][1];
+        const r = game.currRoom.r;
+        const c = game.currRoom.c;
         let msg = document.getElementsByClassName(`suit-value-[${r},${c}]`)[0];
         msg.innerHTML = "The commander should be always near the king... the crown should be in an adjacent room"
     })
 
     overlayMessages.forEach(msg => {
         msg.addEventListener('click', () => {
-            msg.classList.remove('shown');
+            rooms.forEach(room => {
+                room.setAttribute('id','hidden')
+            })
+            game = new Game();
             game.newGame();
+            msg.classList.remove('shown');
         })
     })
 
@@ -33,11 +37,7 @@ const ready = () => {
                 if (roomValue) {
                     game.specialRooms(roomValue);
                 }
-                if (game.ckloseGame()) {
-                    //life === 0 || no more rooms?
-                }
             }
-
         })
     })
 

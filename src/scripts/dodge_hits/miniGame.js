@@ -73,12 +73,10 @@ export default class MiniGame {
         let pXCenter = this.player.xPos + (this.player.width/2); //0+radius
         let pYCenter = this.player.yPos + (this.player.height/2); //0+radius
 
-        //player he in weap y range, player wid in weap x range
         if ( ((pYCenter < wBottom) && (pYCenter > wTop)) && ((pXCenter < wRight) && (pXCenter > wLeft)) ) {
             this.gameOn = false;
             this.mainGame.lifeCount -=1;
             document.dispatchEvent(new Event("life-update"));
-            
             return true;
         }
         return false;
@@ -117,6 +115,7 @@ export default class MiniGame {
             } 
             this.gameOn = false;
             this.mainGame.dodgeHits = null;
+            this.mainGame.ckloseGame();
         }
     }
 

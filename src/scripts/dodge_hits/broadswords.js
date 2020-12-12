@@ -9,7 +9,7 @@ export default class Broadsword {
         this.itemImg = "src/images/broadsword.png";
         this.xDir = (Math.random() > .5) ? -1 : 1
         this.yDir = (Math.random() > .5) ? -1 : 1
-        this.xVel = ((Math.floor(Math.random()* difficulty)+1) + difficulty) * this.xDir;
+        this.xVel = ((Math.floor(Math.random()* difficulty)+2) + difficulty) * this.xDir;
         this.yVel = this.xVel * this.yDir;
         this.drawItem = this.drawItem.bind(this);
         this.moveItem = this.moveItem.bind(this)

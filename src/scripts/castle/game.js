@@ -10,24 +10,24 @@ export default class Game {
         this.openRoom = this.openRoom.bind(this);
         this.specialRooms = this.specialRooms.bind(this);
         this.ckloseGame = this.ckloseGame.bind(this);
-        this.gameWin = this.gameWin.bind(this);
+        this.ckGameWin = this.ckGameWin.bind(this);
         this.playMiniGame = this.playMiniGame.bind(this);
-
     }
 
     newGame() {
         this.board = new Board(3, 5);
         this.lifeCount = 2
         this.guardLocation = this.board.roomMap.guard;
-        this.shownRooms = [];
+        this.currRoom = null;
         this.dodgeHits = null;
+        document.dispatchEvent(new Event("life-update"));
     }
 
     openRoom(room) {
         const roomValue = room.lastElementChild.lastElementChild.id;
         const [r, c] = [parseInt(roomValue[0]), parseInt(roomValue[2])]
         const suit = this.board.grid[r][c]
-        this.shownRooms.push([r,c])
+        this.currRoom = suit;
         suit.drawSuit();
         suit.displayMessage();
         let guardI=-1;
@@ -36,11 +36,7 @@ export default class Game {
                 guardI = i;
             }
         });
-        if (guardI>=0) {
-            this.guardLocation.splice(guardI,1);
-            console.log('after splice',this.guardLocation)
-        }
-        console.log("openroom", this.guardLocation)
+        if (guardI>=0) {this.guardLocation.splice(guardI,1);}
         if (suit.value === 'guard' || suit.value === 'commander' || 
             suit.value === 'storage' || suit.value === 'crown' || suit.value === 'prince') {
                 return suit.value
@@ -64,7 +60,7 @@ export default class Game {
                 document.dispatchEvent(new Event("life-update"));
                 break
             case 'crown':
-                this.gameWin()
+                this.ckGameWin()
                 break
             case 'prince':
                 if (this.guardLocation.length > 0) {
@@ -78,10 +74,6 @@ export default class Game {
                 }
                 break
         }
-    }
-
-    ckloseGame() {
-
     }
 
     playMiniGame(difficulty, mainGame) {
@@ -98,14 +90,27 @@ export default class Game {
         window.addEventListener('keydown', (e) => {
             e.preventDefault();
             this.dodgeHits.registerPlayerMoves(e); 
-            this.dodgeHits.closeGame(e);
+            if (!this.dodgeHits.gameOn) {
+                this.dodgeHits.closeGame(e);
+            }
         });
-        
-
-
     }
 
-    gameWin(){
+    ckloseGame() {
+        if (this.lifeCount <= 0) {
+            let msg = document.getElementById("lose-message")
+            msg.classList.add("shown")
+            return true;
+        }
+        return false
+    }
 
+    ckGameWin(){
+        if (this.currRoom.value === "crown") {
+            let msg = document.getElementById("win-message")
+            msg.classList.add("shown")
+            return true;
+        }
+        return false
     }
 }

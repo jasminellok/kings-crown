@@ -11,12 +11,10 @@ export default class Player {
         this.playerImg = "src/images/thief48_64.png";
         this.speed = 10;
         this.drawPlayer = this.drawPlayer.bind(this);
-        //this.animatePlayer = this.animatePlayer.bind(this);
         this.movePlayer = this.movePlayer.bind(this);
     }
 
     drawPlayer(ctx) {
-        //player src pos, canvas pos
         const player = new Image();
         player.src = this.playerImg;
             ctx.drawImage(
