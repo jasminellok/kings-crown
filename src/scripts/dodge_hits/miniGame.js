@@ -37,7 +37,7 @@ export default class MiniGame {
         this.showGame = this.showGame.bind(this);
     }
 
-    generateWeaponCache() { //to play
+    generateWeaponCache() { 
         for (let count=0; count < this.wCount; count++) {
             const weapon = new Broadsword(this.cWidth, this.cHeight, this.difficulty)
             this.weaponCache.push(weapon)
@@ -50,7 +50,7 @@ export default class MiniGame {
         this.canvas.style.display = "block"
     }
     
-    registerPlayerMoves(e) { //keydown listener
+    registerPlayerMoves(e) { 
         if (!this.gameOn) return;
         this.player.movePlayer(this.cWidth,this.cHeight, e);
         this.player.drawPlayer(this.ctx)

@@ -16,7 +16,6 @@ export default class Broadsword {
     }
 
     drawItem(ctx) {
-        //player src pos, canvas pos
         const item = new Image();
         item.src = this.itemImg;
         ctx.drawImage(

@@ -5,7 +5,7 @@ export default class Board {
     constructor(row, col) {
         this.row = row;
         this.col = col;
-        this.grid = this.makeGrid(row,col); //2d arr of nulls
+        this.grid = this.makeGrid(row,col); 
         this.roomMap = {};
         this.roomKeys;
 
@@ -51,7 +51,6 @@ export default class Board {
             if (add) possiblePos.push(add)
         })
 
-        // debugger;
         let randI = Math.floor(Math.random() * possiblePos.length);
         let comPos = possiblePos[randI];
         let commander = new Room("commander", "src/images/commander.png", comPos[0],comPos[1]);
@@ -76,7 +75,6 @@ export default class Board {
         if(dRow < 0 || dRow >= this.row || dCol < 0 || dCol >= this.col) {
             return false
         } else {
-            // debugger;
             return [dRow, dCol] 
         }
     }
@@ -98,8 +96,6 @@ export default class Board {
             const j = Math.floor(Math.random() * (i));
             [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
         }
-
-        // let roomNum = [...Array(this.row*this.col).keys()];
 
         this.roomKeys.forEach(room => {
             let i = room[0];

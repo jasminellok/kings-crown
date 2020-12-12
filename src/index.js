@@ -2,7 +2,7 @@ import "./styles/reset.scss";
 import "./styles/index.scss";
 import Game from "./scripts/castle/game.js"
 
-const ready = () => {
+const playGame = () => {
     let overlayMessages = Array.from(document.getElementsByClassName("overlay"));
     let rooms =  Array.from(document.getElementsByClassName("room"));
     let game;
@@ -41,11 +41,10 @@ const ready = () => {
         })
     })
 
-    //need a close door/ restart thing
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', ready())
+    document.addEventListener('DOMContentLoaded', playGame())
 } else {
-    ready();
+    playGame();
 }
