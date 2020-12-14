@@ -135,19 +135,19 @@ p{
 }
 
 #shown .door-side {
-  transform: rotateY(-180);
+  transform: rotateY(-180deg);
 }
 
 #shown .suit-side {
-  transform: rotateY(0);
+  transform: rotateY(0deg);
 }
 
 .door-side {
-  transform: rotateY(0)
+  transform: rotateY(0deg)
 }
 
 .suit-side {
-  transform: rotateY(180);
+  transform: rotateY(180deg);
 }
 
 
