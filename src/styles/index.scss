@@ -138,19 +138,17 @@ p{
   transform: rotateY(-180deg);
 }
 
-#shown .suit-side {
-  transform: rotateY(0deg);
-}
-
 .door-side {
   transform: rotateY(0deg)
+}
+
+#shown .suit-side {
+  transform: rotateY(0deg);
 }
 
 .suit-side {
   transform: rotateY(180deg);
 }
-
-
 
 /////////////////////////////////////
 
