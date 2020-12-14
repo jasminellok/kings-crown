@@ -44,7 +44,7 @@ const playGame = () => {
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', playGame())
+    document.addEventListener('DOMContentLoaded', playGame());
 } else {
     playGame();
 }
