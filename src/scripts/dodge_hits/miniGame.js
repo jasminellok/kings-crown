@@ -2,8 +2,6 @@ import Player from './player';
 import Broadsword from './broadswords';
 import Collision from './collision';
 
-
-
 export default class MiniGame {
     constructor(difficulty, mainGame) {
         this.canvas = document.getElementsByClassName("canvas-mini-game")[0];
@@ -65,13 +63,13 @@ export default class MiniGame {
     }
     
     ckCollision(weapon){
-        let wLeft = weapon.xPos; //0
-        let wRight = weapon.xPos + (weapon.width); // 0+w
-        let wTop = weapon.yPos; //0
-        let wBottom = weapon.yPos + (weapon.height); //0+h
+        let wLeft = weapon.xPos; 
+        let wRight = weapon.xPos + (weapon.width); 
+        let wTop = weapon.yPos; 
+        let wBottom = weapon.yPos + (weapon.height); 
 
-        let pXCenter = this.player.xPos + (this.player.width/2); //0+radius
-        let pYCenter = this.player.yPos + (this.player.height/2); //0+radius
+        let pXCenter = this.player.xPos + (this.player.width/2);
+        let pYCenter = this.player.yPos + (this.player.height/2); 
 
         if ( ((pYCenter < wBottom) && (pYCenter > wTop)) && ((pXCenter < wRight) && (pXCenter > wLeft)) ) {
             this.gameOn = false;
@@ -82,7 +80,7 @@ export default class MiniGame {
         return false;
     }
 
-    animateGame() { //to play
+    animateGame() {
         if (!this.gameOn) return;
         this.ctx.clearRect(0,0,this.cWidth, this.cHeight)  
         this.drawBg()
@@ -104,7 +102,7 @@ export default class MiniGame {
     }
 
 
-    closeGame(e){ //keydown listener
+    closeGame(e){ 
         if (e.key === "Escape") {
             if (this.canvas.style.display === "block") {
                 this.canvas.style.display = "none";
