@@ -92,8 +92,8 @@ export default class Board {
         let remaining = ["prince", "guard", "guard", "guard", "guard", "guard", "guard",
             "maid", "maid", "maid", "storage", "storage"]
 
-        for (let i = 0; i < remaining.length - 1; i++) {
-            const j = Math.floor(Math.random() * (i));
+        for (let i = remaining.length-1; i>0; i--) {
+            const j = Math.floor(Math.random() * (i+1));
             [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
         }
 
