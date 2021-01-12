@@ -89,6 +89,7 @@ export default class Game {
 
         window.addEventListener('keydown', (e) => {
             e.preventDefault();
+            if (!this.dodgeHits) return
             this.dodgeHits.registerPlayerMoves(e); 
             if (!this.dodgeHits.gameOn) {
                 this.dodgeHits.closeGame(e);
