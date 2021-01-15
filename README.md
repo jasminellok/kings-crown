@@ -17,34 +17,84 @@ The game ends when the player loses both life points or finds the crown.
 - [x] There are six types of rooms (Commander, guards, maids, queen, king, prince, storage)
 - [x] Player has two life counts
 - [x] Opening a room with a knight will begin a mini game (dodging hits)
-### Bonus Features
-- [ ] Opening the rooms will have audio effects as well as animation effects
+
 
 ## Technologies
 - JS, HTML, CSS
 
-### Potential Challenges
+## Highligt Features and Challenges
+
+### Additional Mini-Game
 <img src="/src/images/readme-dodge.png"/>
-The biggest challenge was having the mini game of dodging hits within the main game of opening the rooms. How this part works is once the player opens the room, it will initiate the mini-game where the player icon will show up on the bottom of a grid and sword icons animations will start to drop at some speed and the player has to use the arrow keys to avoid it and reach the top of the grid.
+A special feature for this game was having the mini game of dodging hits within the main game of opening the rooms. How this part works is once the player opens the room, it will initiate the mini-game where the player icon will show up on the bottom of a grid and sword icons animations will start to drop at some speed and the player has to use the arrow keys to avoid it and reach the top of the grid.
 
-## Implementation Timeline
-### December 7
-* Finish dodging hits mini game 
+### Shuffle Board
+To enhance user experience, each new game will shuffle the board so that the room positions are not the same as the previous game. This was particularly challenging because certain rooms have a connection with another room (ex:commander is always adjacent to crown, queen always on same row as crown), so with each shuffle, it must still preserve the relationships. I achieved this with an extensive shuffle method, that would first assign the rooms with the most relationship positions in the board and then shuffle the rest of the rooms and place them randomly on the board.
 
-### December 8
-* Game logic for rendering the board with randomized rooms (King, Commander, and Queen first)
-* Functionality for the rooms (ex: clicking on maid will open another room)
-* Adding and reducing life counts 
+```jsx
+    generateRandCrown(row,col) {
+        const r = Math.floor(Math.random() * row);
+        const c = Math.floor(Math.random() * col);
+        let crown = new Room("crown", "src/images/crown.png", r,c);
+        this.grid[r][c] = crown;
+        return [r,c];
+    }
 
-### December 9
-* Splash page with description, rules and instructions
-* Connecting minigame and board
+    generateRandCommander(crownPos) {
+        const deltas = [[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[1,-1],[1,0],[1,1]];
+        const possiblePos = [];
 
-### December 10
-* CSS and finding/ creating images to use
+        deltas.forEach(d => {
+            let add = this.validComPos(crownPos, d);
+            if (add) possiblePos.push(add)
+        })
 
-### December 11
-* Finish styling
-* Finish README
+        let randI = Math.floor(Math.random() * possiblePos.length);
+        let comPos = possiblePos[randI];
+        let commander = new Room("commander", "src/images/commander.png", comPos[0],comPos[1]);
+        this.grid[comPos[0]][comPos[1]] = commander;
+    }
+
+    generateRandQueen(crownRow) {
+        const possible = []
+        for (let i=0; i < this.col; i++) {
+            let pos = [crownRow,i];
+            if (this.validGenPos(pos))possible.push(pos);
+        }
+        let randI = Math.floor(Math.random() * possible.length);
+        let qPos = possible[randI];
+        let queen = new Room("queen", "src/images/queen.png", qPos[0], qPos[1]);
+        this.grid[qPos[0]][qPos[1]] = queen;
+    }
+
+    ...
+
+    
+    shuffle(row, col) {
+    let crownPos = this.generateRandCrown(row,col);
+    this.generateRandCommander(crownPos);
+    this.generateRandQueen(crownPos[0]);
+
+    let remaining = ["prince", "guard", "guard", "guard", "guard", "guard", "guard",
+        "maid", "maid", "maid", "storage", "storage"]
+
+    for (let i = remaining.length-1; i>0; i--) {
+        const j = Math.floor(Math.random() * (i+1));
+        [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+    }
+
+    this.roomKeys.forEach(room => {
+        let i = room[0];
+        let j = room[1];
+        if (this.grid[i][j] === null) {
+            let populateValue = remaining.shift();
+            this.populate(populateValue,[i,j]);
+        }
+        let value = this.grid[i][j].value;
+        if (!this.roomMap[value]) this.roomMap[value] = [];
+        this.roomMap[value].push([i,j]);
+    })
+
+```
 
 
