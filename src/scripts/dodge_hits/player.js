@@ -9,7 +9,7 @@ export default class Player {
         this.yPos = cHeight-this.height;
         this.radius = this.height/2;
         this.playerImg = "src/images/thief48_64.png";
-        this.speed = 10;
+        this.speed = 15;
         this.drawPlayer = this.drawPlayer.bind(this);
         this.movePlayer = this.movePlayer.bind(this);
     }
